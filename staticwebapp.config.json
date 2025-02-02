@@ -1,0 +1,19 @@
+{
+    "routes": [
+        {
+            "route": "/api/*",
+            "allowedRoles": ["anonymous"]
+        },
+        {
+            "route": "/*",
+            "rewrite": "/index.html"
+        }
+    ],
+    "mimeTypes": {
+        ".js": "application/javascript"
+    },
+    "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": ["/images/*", "/css/*"]
+    }
+}

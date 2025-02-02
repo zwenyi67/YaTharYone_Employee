@@ -1,0 +1,164 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "new": "New",
+    "edit-detail": "Edit Detail",
+    "back": "Back",
+    "name": "Name",
+    "edit": "Edit",
+    "complete": "Complete",
+    "address": "Address",
+    "upload": "Upload",
+    "cancel": "Cancel",
+    "document-upload": "Document Upload",
+    "scan": "Scan",
+    "submit": "Submit",
+    "select-file": "Select File",
+    "approve": "Approve",
+    "questions": "Questions",
+    "answers": "Answers",
+    "accept": "Accept",
+    "reject": "Reject",
+    "no-file-selected": "No File Selected",
+    "close": "Close",
+    "preview": "Preview",
+    "add": "Add",
+    "save": "Save",
+    "details": "Details",
+    "create": "Create",
+    "update": "Update",
+    "job": "Job",
+    "result": "Result",
+    "add-new": "Add New",
+    "basic-question-yes": "Yes",
+    "basic-question-no": "No",
+    "basic-score-pass": "Pass",
+    "basic-score-fail": "Fail"
+  },
+  "title": {
+    "dashboard": "Dashboard",
+    "supplier-management": "Supplier Management",
+    "suppliers": "Suppliers",
+    "purchases": "Purchase Histories",
+    "transcations": "Transcations",
+    "purchasing-transactions": "Purchasing Transactions",
+    "inventory-management": "Inventory Management",
+    "item-category-management": "Item Category Management",
+    "inventory": "Inventory",
+    "item-category": "Item Category",
+    "menu": "Menu",
+    "menu-category": "Menu Categroy",
+    "employee-management": "Employee Management",
+    "table-management": "Table Management",
+    "menu-category-management": "Menu Category Management",
+    "menu-management": "Menu Management",
+    "menuitem-addon-management": "Item Add on"
+  },
+  "tabs": {
+    "check-documents": "Check Documents",
+    "search-for-candidate": "Search for Candidate",
+    "create-interview-round": "Create Interview Round"
+  },
+  "fields": {
+    "common": {
+      "number": "Number"
+    },
+    "actions": "Actions",
+    "supplier-management": {
+      "suppliers": {
+        "number": "No",
+        "name": "Supplier",
+        "email": "Email",
+        "phone": "Phone",
+        "profile": "Profile"
+      },
+      "purchases": {
+        "number": "No",
+        "supplier": "Supplier",
+        "total_amount": "Total Amount",
+        "purchase_note": "Purchase Note",
+        "purchase_date": "Purchase Date"
+      }
+    },
+    "inventory-management": {
+      "inventory": {
+        "number": "No",
+        "name": "Item Name",
+        "category": "Item Category",
+        "unit_of_measure": "Unit",
+        "unit_cost": "Cost",
+        "current_stock": "Current Stock",
+        "min_stock_level": "Min Stock Level",
+        "reorder_level": "Reorder Level",
+        "expiry_period_inDay": "Expiry Period In Day"
+      },
+      "item-category": {
+        "number": "No",
+        "name": "Item Name",
+        "description": "Description"
+      }
+    },
+    "menu-management": {
+      "menu": {
+        "number": "No",
+        "name": "Menu Name",
+        "profile": "Image",
+        "price": "Price",
+        "category": "Category",
+        "addons": "Add On Item"
+      },
+      "menu-category": {
+        "number": "No",
+        "name": "Category Name",
+        "description": "Description"
+      }
+    },
+    "employee-management": {
+      "number": "No",
+      "fullname": "Fullname",
+      "email": "Email",
+      "phone": "Phone",
+      "profile": "Profile"
+    },
+    "table-management": {
+      "number": "No",
+      "tableNo": "Table Number",
+      "capacity": "Capacity"
+    },
+    "sd": {}
+  },
+
+
+  "success-title": {
+    "login": "You logged in with the following email:",
+    "add": "Addition successful",
+    "update": "Update successful",
+    "scan": "Scan Successful!"
+  },
+  "success-msg": {
+    "login": "Successful login",
+    "add": "You have successfully added.",
+    "update": "You have successfully updated.",
+    "scan": "You have successfully scanned the document."
+  },
+  "error-title": {
+    "login": "Login Fail!",
+    "unknown-error": "Something went wrong!",
+    "scan": "Scan Fail!",
+    "add": "Add Failed!",
+    "update": "Update Failed!"
+  },
+  "error-msg": {
+    "login": "An error occurred during login. Please try again.",
+    "fail-query": "Failed to fetch data!",
+    "required": "Required",
+    "add": "Something went wrong.",
+    "update": "Something went wrong."
+  },
+  "dialog-title": {
+    "are-you-sure": "Are you sure?"
+  },
+  "dialog-desc": {
+    "add-person-to-onboard": "You add [[Number]] person. Accept to 'Onboard'."
+  }
+}

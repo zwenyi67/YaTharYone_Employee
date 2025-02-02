@@ -1,0 +1,70 @@
+@keyframes float-up {
+	0% {
+		transform: translateY(0) rotate(0deg);
+		opacity: 1;
+		border-radius: 0;
+	}
+
+	100% {
+		transform: translateY(-1000px) rotate(720deg);
+		opacity: 0;
+		border-radius: 50%;
+	}
+}
+
+@keyframes table-loading-bar {
+	0% {
+		background-position: -150% 0, -150% 0;
+	}
+	66% {
+		background-position: 250% 0, -150% 0;
+	}
+	100% {
+		background-position: 250% 0, 250% 0;
+	}
+}
+
+@keyframes scale-up-ver-top {
+	0% {
+		transform: scaleY(0);
+		transform-origin: 100% 0%;
+	}
+	100% {
+		transform: scaleY(1);
+		transform-origin: 100% 0%;
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes l7 {
+	0% {
+		background-position: 0 0, 0 100%, 100% 100%;
+	}
+	25% {
+		background-position: 100% 0, 0 100%, 100% 100%;
+	}
+	50% {
+		background-position: 100% 0, 0 0, 100% 100%;
+	}
+	75% {
+		background-position: 100% 0, 0 0, 0 100%;
+	}
+	100% {
+		background-position: 100% 100%, 0 0, 0 100%;
+	}
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(1turn);
+	}
+}

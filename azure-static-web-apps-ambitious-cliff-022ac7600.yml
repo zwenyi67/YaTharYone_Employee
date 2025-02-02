@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+      - main
+jobs:
+  - job: build_and_deploy_job
+    displayName: Build and Deploy Job
+    condition: or(eq(variables['Build.Reason'], 'Manual'), or(eq(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.Reason'], 'IndividualCI')))
+    pool:
+      vmImage: ubuntu-latest
+    variables:
+      - group: Azure-Static-Web-Apps-ambitious-cliff-022ac7600-variable-group
+    steps:
+      - checkout: self
+        submodules: true
+
+      - script: |
+          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          node -v
+        displayName: 'Install Node.js >=18.12.0'
+
+      - script: |
+          npm install -g pnpm
+          pnpm -v # Check pnpm version
+        displayName: Install pnpm
+
+      - script: |
+          pnpm install --no-frozen-lockfile
+        displayName: Install dependencies
+
+      - script: |
+          pnpm run build
+        displayName: Build App
+
+      - script: |
+          pnpm store prune && rm -rf ./node_modules/
+        displayName: Clear cache
+
+      - task: AzureStaticWebApp@0
+        inputs:
+          azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_CLIFF_022AC7600)
+          app_location: "/" # App source code path
+          api_location: "" # API source code path - optional
+          output_location: "dist" # Vite default output directory
+          skip_app_build: true # Skip the build process in Azure
+
+          #app_build_command: 'pnpm install && pnpm run build' # Builds the app using pnpm
+          #api_build_command: 'pnpm store prune && rm -rf ./node_modules/.cache' # Optional cleanup for cache

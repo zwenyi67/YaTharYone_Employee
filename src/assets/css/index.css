@@ -1,0 +1,330 @@
+@import url("./animation.css");
+@import url("./candidate.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 0 0% 3.9%;
+
+    --muted: 0 0% 46%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+
+    --primary: 4 86% 54%;
+    --primary-foreground: 220 20% 97%;
+
+    --secondary: 200 100% 29%;
+    --secondary-foreground: 220 20% 97%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 148 100% 34%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 40 95% 56%;
+    --warning-foreground: 0 0% 98%;
+
+    --lightBlue: 220 20% 97%;
+    --lightBlue-foreground: 200 100% 29%;
+
+    --lightGreen: 148 100% 91%;
+    --lightGreen-foreground: 166 79% 42%;
+
+    --vivid: 253 81% 56%;
+
+    --charcoal: 0 0 25%;
+
+    --stoneGrey: 229 8% 73%;
+
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 20% 97%;
+    --foreground: 0 0% 98%;
+
+    --muted: 0 0% 46%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+
+    --primary: 4 86% 54%;
+    --primary-foreground: 220 20% 97%;
+
+    --secondary: 200 100% 29%;
+    --secondary-foreground: 220 20% 97%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 148 100% 34%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 40 95% 56%;
+    --warning-foreground: 0 0% 98%;
+
+    --lightBlue: 220 20% 97%;
+    --lightBlue-foreground: 200 100% 29%;
+
+    --lightGreen: 148 100% 91%;
+    --lightGreen-foreground: 166 79% 42%;
+
+    --vivid: 253 81% 56%;
+
+    --charcoal: 0 0 25%;
+
+    --stoneGrey: 229 8% 73%;
+
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  font-family: "Inter", Arial, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 40px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+.editor {
+  background-color: #2d2d2d;
+  color: #f8f8f2; /* Default text color */
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  padding: 16px;
+  padding-top: 40px; /* Space for positioning */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Custom styles for Prism tokens */
+.editor .token.comment,
+.editor .token.block-comment {
+  color: #75715e !important; /* Comment color */
+}
+
+.editor .token.keyword {
+  color: #66d9ef !important; /* Keyword color */
+}
+
+.editor .token.string {
+  color: #e6db74 !important; /* String color */
+}
+
+.editor .token.function {
+  color: #a6e22e !important; /* Function name color */
+}
+
+.editor .token.number {
+  color: #ae81ff !important; /* Number color */
+}
+
+.editor .token.variable {
+  color: #f92672 !important; /* Variable color */
+}
+
+.editor .token.operator {
+  color: #f92672 !important; /* Operator color */
+}
+
+/* login page */
+.login-container {
+  background: url("../images/login-background.png");
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-boxes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.login-boxes li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: float-up 25s linear infinite;
+  bottom: -150px;
+}
+
+/* table loader */
+.table-loader {
+  height: 2px;
+  width: 100%;
+  --c: no-repeat linear-gradient(hsl(var(--primary)) 0 0);
+  background: var(--c), var(--c), hsl(var(--accent));
+  background-size: 60% 100%;
+  animation: table-loading-bar 4s infinite;
+}
+
+.loader {
+  width: 55px;
+  aspect-ratio: 1;
+  --g1: conic-gradient(from 90deg at 3px 3px, #0000 90deg, #fff 0);
+  --g2: conic-gradient(from -90deg at 22px 22px, #0000 90deg, #fff 0);
+  background: var(--g1), var(--g1), var(--g1), var(--g2), var(--g2), var(--g2);
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  animation: l7 1.5s infinite;
+}
+
+.pdf-width {
+  width: calc(100% - 0.25rem) !important;
+}
+
+/* scanning overlay */
+.scanner-container {
+  --position-space: 8px;
+  --space-between: 16px;
+  --corner-size: 40px; /* Size of the corner outline */
+  --border-thickness: 2px; /* Thickness of the border */
+  --border-gap: 0px; /* Gap between border and image */
+  --border-radius: 8px; /* Rounded corner radius */
+
+  position: absolute;
+  top: calc(-1 * var(--position-space));
+  left: calc(-1 * var(--position-space));
+  width: calc(100% + var(--space-between));
+  height: calc(100% + var(--space-between));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--border-gap) + var(--border-thickness));
+  outline: var(--border-thickness) solid #555555;
+  outline-offset: calc(-1 * var(--border-thickness));
+  border-radius: var(--border-radius);
+  mask: conic-gradient(
+        at var(--corner-size) var(--corner-size),
+        transparent 75%,
+        #000 0
+      )
+      0 0 / calc(100% - var(--corner-size)) calc(100% - var(--corner-size)),
+    linear-gradient(#000 0 0) content-box;
+}
+
+.scanner-line {
+  width: calc(100% - var(--space-between));
+  height: calc(100% - var(--space-between));
+  position: absolute;
+  top: var(--position-space);
+  left: var(--position-space);
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  border-bottom: 1px solid #ffffff;
+  animation: scale-up-ver-top 5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
+}
+
+.scanning-text {
+  animation: pulse 2s infinite;
+  font-weight: bold;
+  color: white;
+  user-select: none;
+}
+
+.data-type {
+  @apply w-fit px-px text-xs bg-gray-200;
+
+  margin-block: 4px !important;
+}
+
+.spinner-loader {
+  width: 28px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #ffa516 94%, #0000) top/6px 6px
+      no-repeat,
+    conic-gradient(#0000 30%, #ffa516);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 6px), #000 0);
+  animation: spin 1s infinite linear;
+}
+
+.qr-code-corner-outline {
+  --s: 32px; /* the size on the corner */
+  --t: 4px; /* the thickness of the border */
+  --g: 4px; /* the gap between the border and image */
+
+  padding: calc(var(--g) + var(--t));
+  outline: var(--t) solid #1f2937; /* the color here */
+  outline-offset: calc(-1 * var(--t));
+  mask: conic-gradient(at var(--s) var(--s), #0000 75%, #000 0) 0 0 /
+      calc(100% - var(--s)) calc(100% - var(--s)),
+    linear-gradient(#000 0 0) content-box;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.radiant-loading {
+  background: linear-gradient(90deg, #e1e1e1, #ececec, #f3f3f3);
+  background-size: 200% 100%;
+  animation: gradientAnimation 1.5s ease-in-out infinite;
+}
