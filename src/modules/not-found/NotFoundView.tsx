@@ -14,7 +14,10 @@ const NotFoundView = () => {
 
     if (isAuthenticated && role === "chef") {
       navigate('/chef/dashboard')
+    }
 
+    if(!isAuthenticated) {
+      navigate('/auth/login')
     }
   }
 

@@ -7,8 +7,13 @@ import {
 
 export const sidebarData = [
   {
-    routeNames: ["/dashboard"],
+    routeNames: ["/waiter/dashboard"],
     name: "title.dashboard",
+    icon: Gauge,
+  },
+  {
+    routeNames: ["/waiter/orders/tables"],
+    name: "title.orders",
     icon: Gauge,
   },
   {

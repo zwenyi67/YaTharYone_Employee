@@ -17,11 +17,11 @@ import LoginView from "@/modules/auth/login/LoginView";
 import NotFoundView from "@/modules/not-found/NotFoundView";
 
 import ErrorView from "@/modules/error/ErrorView";
-import SupplierView from "@/modules/supplier-management/supplier/SupplierView";
-import SupplierFormView from "@/modules/supplier-management/supplier/SupplierFormView";
-import WaiterDashboard from "@/modules/dashboard/WaiterDashboard";
 import ChefLayout from "@/layouts/ChefLayout";
 import ChefDashboard from "@/modules/dashboard/ChefDashboard";
+import WaiterDashboard from "@/modules/waiter/dashboard/WaiterDashboard";
+import TableList from "@/modules/waiter/order/TableList";
+import MenuList from "@/modules/waiter/order/MenuList";
 const router = createBrowserRouter([
   {
     path: "/waiter",
@@ -37,6 +37,16 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <WaiterDashboard />,
       },
+      {
+        path: "orders/tables",
+        element: <TableList />,
+      },
+      {
+        path: "orders/tables/:id/menus",
+        element: <MenuList />,
+      },
+      // Dashboard End
+     
 
     ],
   },
@@ -55,22 +65,6 @@ const router = createBrowserRouter([
         element: <ChefDashboard />,
       },
       // Dashboard End
-
-      // Supplier Management Start
-
-      // Suppliers
-      {
-        path: "supplier-management/suppliers",
-        element: <SupplierView />,
-      },
-      {
-        path: "supplier-management/suppliers/create",
-        element: <SupplierFormView />,
-      },
-      {
-        path: "supplier-management/suppliers/:id/edit",
-        element: <SupplierFormView />,
-      },
 
     ],
   },

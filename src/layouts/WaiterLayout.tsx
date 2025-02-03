@@ -26,18 +26,18 @@ const WaiterLayout = () => {
       {/* Sidebar */}
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block">
+      {/* <div className="hidden lg:block">
         <div className="lg:flex flex-col hidden min-h-svh bg-gray-100 h-full transition-all duration-300 lg:min-w-[280px] shadow-lg">
           <div className="flex flex-col items-center justify-center h-20">
             <div className="">YaTharYone</div>
           </div>
           <MobileSidebar />
         </div>
-      </div>
+      </div> */}
 
       {/* Mobile Sidebar */}
       {isSidebarOpen &&
-        <div className="block lg:hidden fixed top-0 left-0 w-[280px] h-full bg-gray-100 z-[100] shadow-lg">
+        <div className="fixed top-0 left-0 w-[280px] h-full bg-gray-100 z-[100] shadow-lg">
           <div className="py-4">
             <div className="flex justify-between mb-10 px-3">
               <div className="">
@@ -62,7 +62,7 @@ const WaiterLayout = () => {
           <button
             onClick={toggleSidebar}
             aria-label="Toggle Sidebar"
-            className="lg:hidden"
+          
           >
             {isSidebarOpen ? (
               <XIcon className="w-6 h-6 text-gray-600" />

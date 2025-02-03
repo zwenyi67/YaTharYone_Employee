@@ -33,31 +33,16 @@
     "basic-question-yes": "Yes",
     "basic-question-no": "No",
     "basic-score-pass": "Pass",
-    "basic-score-fail": "Fail"
+    "basic-score-fail": "Fail",
+    "refresh": "Refresh"
   },
   "title": {
     "dashboard": "Dashboard",
     "supplier-management": "Supplier Management",
     "suppliers": "Suppliers",
-    "purchases": "Purchase Histories",
-    "transcations": "Transcations",
-    "purchasing-transactions": "Purchasing Transactions",
-    "inventory-management": "Inventory Management",
-    "item-category-management": "Item Category Management",
-    "inventory": "Inventory",
-    "item-category": "Item Category",
-    "menu": "Menu",
-    "menu-category": "Menu Categroy",
-    "employee-management": "Employee Management",
-    "table-management": "Table Management",
-    "menu-category-management": "Menu Category Management",
-    "menu-management": "Menu Management",
-    "menuitem-addon-management": "Item Add on"
-  },
-  "tabs": {
-    "check-documents": "Check Documents",
-    "search-for-candidate": "Search for Candidate",
-    "create-interview-round": "Create Interview Round"
+    "orders": "Orders",
+    "tables-list": "Tables List",
+    "menus-list": "Menus List"
   },
   "fields": {
     "common": {
@@ -80,51 +65,7 @@
         "purchase_date": "Purchase Date"
       }
     },
-    "inventory-management": {
-      "inventory": {
-        "number": "No",
-        "name": "Item Name",
-        "category": "Item Category",
-        "unit_of_measure": "Unit",
-        "unit_cost": "Cost",
-        "current_stock": "Current Stock",
-        "min_stock_level": "Min Stock Level",
-        "reorder_level": "Reorder Level",
-        "expiry_period_inDay": "Expiry Period In Day"
-      },
-      "item-category": {
-        "number": "No",
-        "name": "Item Name",
-        "description": "Description"
-      }
-    },
-    "menu-management": {
-      "menu": {
-        "number": "No",
-        "name": "Menu Name",
-        "profile": "Image",
-        "price": "Price",
-        "category": "Category",
-        "addons": "Add On Item"
-      },
-      "menu-category": {
-        "number": "No",
-        "name": "Category Name",
-        "description": "Description"
-      }
-    },
-    "employee-management": {
-      "number": "No",
-      "fullname": "Fullname",
-      "email": "Email",
-      "phone": "Phone",
-      "profile": "Profile"
-    },
-    "table-management": {
-      "number": "No",
-      "tableNo": "Table Number",
-      "capacity": "Capacity"
-    },
+
     "sd": {}
   },
 
