@@ -47,15 +47,20 @@ export interface GetMenuCategoriesType extends TimeStamps {
   description: string;
 }
 
-export interface AddSupplierPayloadType {
+export interface GetOrdersType {
+  id: number;
   name: string;
-  contact_person: string;
-  profile: File;
-  phone: string;
-  email: string;
-  business_type: string;
-  address: string;
-  createby?: number;
+  price: number;
+  note: string;
+  quantity: number
+}
+
+export interface ProceedOrderPayloadType {
+  order_list: GetOrdersType[];
+  table_id: number;
+  waiter_id: number;
+  total_price: number;
+  status: string;
 }
 
 export interface UpdateSupplierPayloadType {

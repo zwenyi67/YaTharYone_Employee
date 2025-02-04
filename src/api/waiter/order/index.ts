@@ -6,19 +6,18 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import {
-  AddSupplierPayloadType,
   GetMenuCategoriesType,
   GetMenusType,
   GetTablesType,
   PostResponse,
+  ProceedOrderPayloadType,
   UpdateSupplierPayloadType,
 } from "./types";
 
 const table_URL = "/waiter/tables";
 const menu_URL = "/waiter/menus";
 const menuCategory_URL = "/waiter/menu-categories";
-
-
+const order_URL = "/waiter/orders";
 
 export const getTables = {
   useQuery: (opt?: UseQueryOptions<GetTablesType[], Error>) =>
@@ -80,20 +79,20 @@ export const getMenuCategories = {
     }),
 };
 
-export const addSupplier = {
+export const proceedOrder = {
   useMutation: (
     opt?: UseMutationOptions<
       PostResponse,
       Error,
-      AddSupplierPayloadType,
+      ProceedOrderPayloadType,
       unknown
     >
   ) => {
     return useMutation({
-      mutationKey: ["addSupplier"],
-      mutationFn: async (payload: AddSupplierPayloadType) => {
+      mutationKey: ["proceedOrder"],
+      mutationFn: async (payload: ProceedOrderPayloadType) => {
         const response = await axios.post(
-          `${table_URL}/create`,
+          `${order_URL}/proceedOrder`,
           payload
         )
 
