@@ -18,7 +18,7 @@ import NotFoundView from "@/modules/not-found/NotFoundView";
 
 import ErrorView from "@/modules/error/ErrorView";
 import ChefLayout from "@/layouts/ChefLayout";
-import ChefDashboard from "@/modules/dashboard/ChefDashboard";
+import ChefDashboard from "@/modules/chef/dashboard/ChefDashboard";
 import WaiterDashboard from "@/modules/waiter/dashboard/WaiterDashboard";
 import TableList from "@/modules/waiter/order/TableList";
 import MenuList from "@/modules/waiter/order/MenuList";

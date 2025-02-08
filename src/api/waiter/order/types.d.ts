@@ -6,6 +6,13 @@ export interface GetTablesType extends TimeStamps {
   table_no: string;
   capacity: number;
   status: string;
+  orders: Order[];
+}
+
+export interface Order {
+  id: number;
+  order_number: string;
+  status: string;
 }
 
 export interface GetMenusType extends TimeStamps {
@@ -59,8 +66,8 @@ export interface ProceedOrderPayloadType {
   order_list: GetOrdersType[];
   table_id: number;
   waiter_id: number;
-  total_price: number;
   status: string;
+  order_id: number | string | undefined;
 }
 
 export interface UpdateSupplierPayloadType {

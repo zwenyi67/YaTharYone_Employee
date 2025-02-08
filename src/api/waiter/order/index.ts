@@ -13,8 +13,10 @@ import {
   ProceedOrderPayloadType,
   UpdateSupplierPayloadType,
 } from "./types";
+import { GetChefOrdersType } from "@/api/chef/order/types";
 
-const table_URL = "/waiter/tables";
+const table_URL = "/waiter/tableList";
+const currentTable_URL = "/waiter/currentTableList"
 const menu_URL = "/waiter/menus";
 const menuCategory_URL = "/waiter/menu-categories";
 const order_URL = "/waiter/orders";
@@ -25,6 +27,26 @@ export const getTables = {
       queryKey: ["getTables"],
       queryFn: async () => {
         const response = await axios.get(`${table_URL}`);
+
+        const { data, status, message } = response.data;
+
+        if (status !== 0) {
+          throw new Error(message);
+        }
+
+        return data;
+      },
+      throwOnError: true,
+      ...opt,
+    }),
+};
+
+export const currentTableList = {
+  useQuery: (opt?: UseQueryOptions<GetTablesType[], Error>) =>
+    useQuery<GetTablesType[], Error>({
+      queryKey: ["currentTableList"],
+      queryFn: async () => {
+        const response = await axios.get(`${currentTable_URL}`);
 
         const { data, status, message } = response.data;
 
@@ -75,6 +97,26 @@ export const getMenuCategories = {
         return data;
       },
       throwOnError: true,
+      ...opt,
+    }),
+};
+
+export const getOrderById = {
+  useQuery: (orderId: number | null, opt?: UseQueryOptions<GetChefOrdersType[], Error>) =>
+    useQuery<GetChefOrdersType[], Error>({
+      queryKey: ["getOrderById", orderId],
+      queryFn: async () => {
+        if (!orderId) throw new Error("Order ID is required");
+        const response = await axios.get(`${order_URL}/getOrderById?orderId=${orderId}`);
+        const { data, status, message } = response.data;
+
+        if (status !== 0) {
+          throw new Error(message);
+        }
+
+        return data;
+      },
+      enabled: !!orderId, // Only run if orderId is valid
       ...opt,
     }),
 };

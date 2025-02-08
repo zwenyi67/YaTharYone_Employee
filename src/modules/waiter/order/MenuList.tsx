@@ -1,40 +1,31 @@
 import api from "@/api";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronDown, ChevronUp, CircleChevronLeft, MinusCircle, PlusCircle, RefreshCw, ShoppingCart, Trash2Icon } from "lucide-react";
 import { t } from "i18next";
-import { GetMenusType, GetOrdersType, ProceedOrderPayloadType } from "@/api/waiter/order/types";
+import { GetMenusType, GetOrdersType, Order, ProceedOrderPayloadType } from "@/api/waiter/order/types";
 import { Input } from "@/components/ui/input";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { toast } from "@/hooks/use-toast";
 import { hideLoader, openLoader } from "@/store/features/loaderSlice";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 
 const MenuList = () => {
 
     const { id: tableId } = useParams();
 
-    const { data: menus, refetch: menuRefetch } = api.order.getMenus.useQuery();
-    const { data: categories, refetch: cateRefetch } = api.order.getMenuCategories.useQuery();
+    const { data: menus, refetch: menuRefetch } = api.waiterOrder.getMenus.useQuery();
+    const { data: categories, refetch: cateRefetch } = api.waiterOrder.getMenuCategories.useQuery();
     const [filter, setFilter] = useState<string | null>(null);
     const [showOrderList, setShowOrderList] = useState(false);
 
+    const location = useLocation();
+    const existingOrders: Order[] = location.state?.existingOrders || [];
     const [orders, setOrders] = useState<GetOrdersType[]>([]);
-
-    // // Load from LocalStorage on mount
-    // useEffect(() => {
-    //     const savedOrders = localStorage.getItem("menuOrders");
-    //     if (savedOrders) {
-    //         setOrders(JSON.parse(savedOrders));
-    //     }
-    // }, []);
-
-    // // Save to LocalStorage when orders change
-    // useEffect(() => {
-    //     console.log(orders)
-    // }, [orders]);
 
     const navigate = useNavigate();
 
@@ -43,6 +34,7 @@ const MenuList = () => {
     const refresh = () => {
         menuRefetch();
         cateRefetch();
+        fetchPreviousOrder();
     }
 
     const AddToOrder = (menu: GetMenusType) => {
@@ -108,42 +100,61 @@ const MenuList = () => {
     };
 
     const { mutate: proceedOrder } =
-    api.order.proceedOrder.useMutation({
-      onMutate: () => {
-        dispatch(openLoader());
-      },
-      onSuccess: () => {
-        toast({
-          title: "Proceed Order successfully",
-          variant: "success",
+        api.waiterOrder.proceedOrder.useMutation({
+            onMutate: () => {
+                dispatch(openLoader());
+            },
+            onSuccess: () => {
+                toast({
+                    title: "Proceed Order successfully",
+                    variant: "success",
+                });
+                navigate("/waiter/dashboard");
+            },
+            onError: (error) => {
+                toast({
+                    title: error.message,
+                    variant: "destructive",
+                });
+            },
+            onSettled: () => {
+                dispatch(hideLoader());
+            },
         });
-        navigate("/table-management");
-      },
-      onError: (error) => {
-        toast({
-          title: error.message,
-          variant: "destructive",
-        });
-      },
-      onSettled: () => {
-        dispatch(hideLoader());
-      },
-    });
 
     const resetOrder = () => {
         setOrders([]);
     }
 
     const proceedToOrder = () => {
+        const order_id = existingOrders.length > 0 ? existingOrders[0].id : "null"
         const payload: ProceedOrderPayloadType = {
             order_list: orders,
             table_id: Number(tableId),
-            waiter_id: 11,
-            total_price: Number(orders.reduce((acc, order) => acc + order.price * order.quantity, 0).toFixed(2)),
-            status: "pending"
+            waiter_id: 1,
+            status: "pending",
+            order_id: order_id
         }
         proceedOrder(payload);
     }
+
+    const [previousOrderDialog, setPreviousOrderDialog] = useState(false);
+    const [selectedOrderId] = useState<number | null>(
+        existingOrders?.[0]?.id ?? null
+    );
+
+    const {
+        data: previousOrderData,
+        refetch: fetchPreviousOrder,
+    } = api.waiterOrder.getOrderById.useQuery(selectedOrderId);
+
+    const handlePreviousOrder = () => {
+        if (selectedOrderId) {
+            fetchPreviousOrder();
+            setPreviousOrderDialog(true);
+        }
+    };
+
 
     const filteredMenus = filter ? menus?.filter(menu => menu.category_id === parseInt(filter)) : menus;
 
@@ -152,6 +163,14 @@ const MenuList = () => {
             {/* Header */}
             <div className="border px-4 py-3 bg-secondary rounded-t-lg text-white font-semibold flex justify-between items-center">
                 <div>{t("title.orders")} - {t("title.menus-list")}</div>
+                <Button
+                    variant="secondary"
+                    className="flex items-center gap-2"
+                    onClick={refresh}
+                >
+                    <RefreshCw className="h-4 w-4" />
+                    {t("common.refresh")}
+                </Button>
             </div>
 
             {/* Menu Grid */}
@@ -162,6 +181,18 @@ const MenuList = () => {
                         </Link>
                     </div>
                     <div className="flex gap-2 my-4">
+                        {existingOrders.length > 0 && (
+                            <div className="flex gap-2">
+                                <Button onClick={handlePreviousOrder}
+                                    variant="secondary">
+                                    Previous Orders
+                                </Button>
+                                <Button
+                                    variant="secondary">
+                                    Payment
+                                </Button>
+                            </div>
+                        )}
                         <Button
                             variant="secondary"
                             className="relative flex items-center gap-2"
@@ -176,10 +207,6 @@ const MenuList = () => {
                             )}
                         </Button>
 
-                        {/* Refresh Button */}
-                        <Button variant="secondary" className="flex items-center gap-2" onClick={refresh}>
-                            <RefreshCw className="size-4" /> Refresh
-                        </Button>
                     </div>
                 </div>
                 <div className="flex justify-between mb-6">
@@ -319,13 +346,52 @@ const MenuList = () => {
                             <span className="text-xl font-bold text-secondary">${orders.reduce((acc, order) => acc + order.price * order.quantity, 0).toFixed(2)}</span>
                         </div>
                         <div className="flex flex-row gap-3">
-                        <Button onClick={resetOrder} className="w-full text-lg py-3">Reset the Orders </Button>
-                        <Button onClick={proceedToOrder} variant={'secondary'} className="w-full text-lg py-3">Proceed to Order</Button>
+                            <Button onClick={resetOrder} className="w-full text-lg py-3">Reset the Orders </Button>
+                            <Button onClick={proceedToOrder} variant={'secondary'} className="w-full text-lg py-3">Proceed to Order</Button>
                         </div>
                     </div>
                 </div>
             )}
 
+            {/* Previous Orders Dialog */}
+            {previousOrderDialog && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-3xl h-[60%] overflow-y-auto shadow-lg">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-semibold">Previous Orders</h2>
+                            <Button variant="ghost" onClick={() => setPreviousOrderDialog(false)}>
+                                <Cross1Icon className="h-6 w-6 text-gray-600" />
+                            </Button>
+                        </div>
+                        <div>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Item Name</TableHead>
+                                        <TableHead>Quantity</TableHead>
+                                        <TableHead>Price Per Item</TableHead>
+                                        <TableHead>Total</TableHead>
+                                        <TableHead>Status</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {previousOrderDialog && previousOrderData && (
+                                        previousOrderData[0].order_details.map((item) => (
+                                            <TableRow key={item.id}>
+                                                <TableCell>{item.menu.name}</TableCell>
+                                                <TableCell>{item.quantity}</TableCell>
+                                                <TableCell>${item.menu.price}</TableCell>
+                                                <TableCell>${(item.menu.price*item.quantity).toFixed(2)}</TableCell>
+                                                <TableCell>{item.status}</TableCell>
+                                            </TableRow>
+                                        ))
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

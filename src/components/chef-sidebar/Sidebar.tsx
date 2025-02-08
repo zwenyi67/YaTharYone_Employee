@@ -1,10 +1,10 @@
-import { sidebarData } from "@/components/sidebar/sidebarData.ts";
+import { sidebarData } from "@/components/chef-sidebar/sidebarData.ts";
 import { t } from "i18next";
 import { ChevronRightIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-const MobileSidebar = () => {
+const Sidebar = () => {
   const [openSubMenus, setOpenSubMenus] = useState<Record<string, boolean>>({});
 
   const toggleSubMenu = (itemName: string) => {
@@ -122,4 +122,4 @@ const MobileSidebar = () => {
   );
 };
 
-export default MobileSidebar;
+export default Sidebar;

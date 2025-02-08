@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 
 const TableList = () => {
-	const { data, isFetching, refetch } = api.order.getTables.useQuery();
+	const { data, isFetching, refetch } = api.waiterOrder.getTables.useQuery();
 	const [filter, setFilter] = useState<string | null>(null);
 
 	const navigate = useNavigate();
@@ -31,15 +31,28 @@ const TableList = () => {
 	};
 
 	const onTableClick = (item: GetTablesType) => {
-		if (item.status === "available") {
-			navigate(`/waiter/orders/tables/${item.id}/menus`)
-		} else {
+		if (item.status === "outofservice") {
 			toast({
-				title: "Can only select the available table",
+				title: "Table you selected is Out of Service",
 				variant: "destructive",
+			});
+			return;
+		}
+	
+		// Check if table has existing active (occupied) orders
+		if (item.status === "occupied" && item.orders) {
+			// Navigate to menu page with existing order data
+			navigate(`/waiter/orders/tables/${item.id}/menus`, {
+				state: { existingOrders: item.orders }, // Pass orders via state
+			});
+		} else {
+			// For Available / Reserved tables, start a new order
+			navigate(`/waiter/orders/tables/${item.id}/menus`, {
+				state: { existingOrders: [] }, // Empty orders for new order
 			});
 		}
 	};
+	
 
 	// Filter tables based on status
 	const filteredData = filter ? data?.filter(item => item.status === filter) : data;
@@ -49,6 +62,14 @@ const TableList = () => {
 			{/* Header */}
 			<div className="border px-4 py-3 bg-secondary rounded-t-lg text-white font-semibold flex justify-between items-center">
 				<div>{t("title.orders")} - {t("title.tables-list")}</div>
+				<Button
+                    variant="secondary"
+                    className="flex items-center gap-2"
+                    onClick={() => refetch()}
+                >
+                    <RefreshCw className="h-4 w-4" />
+                    {t("common.refresh")}
+                </Button>
 			</div>
 
 			{/* Table Grid */}
@@ -89,11 +110,6 @@ const TableList = () => {
 							</SelectContent>
 						</Select>
 					</div>
-					{/* Refresh Button */}
-					<Button variant="secondary" className="flex items-center gap-2 my-4" onClick={() => refetch()}>
-						<RefreshCw className="size-4" />
-						{t("common.refresh")}
-					</Button>
 				</div>
 				<div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-3 gap-6">
 					{!isFetching ? (
