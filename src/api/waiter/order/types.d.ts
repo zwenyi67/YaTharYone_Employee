@@ -91,6 +91,37 @@ export interface GetRolesType {
   name: string;
 }
 
+export interface ServeOrderPayloadType {
+  order_id: number;
+  orderDetail_id: number;
+  quantity: number;
+  status: string;
+}
+
+export interface RequestBillPayloadType {
+  order_id: number;
+}
+
+export interface GetPrevOrderType extends TimeStamps {
+  id: number;
+  order_number: string;
+  status: string;
+  order_details: OrderDetails[];
+  table: Table;
+  payment: Payment;
+}
+
+export interface Payment extends TimeStamps {
+  id: number;
+  payment_number: string;
+  payment_method: string;
+  payment_status: string;
+  order_id: number;
+  waiter_id: number;
+  cashier_id: number;
+}
+
+
 export interface PostResponse {
   data: string
   status: number

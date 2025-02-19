@@ -9,6 +9,20 @@ export interface GetChefOrdersType extends TimeStamps {
   table: Table;
 }
 
+export interface StartPreparingPayloadType {
+  order_id: number;
+  orderDetail_id: number;
+  quantity: number;
+  status: string;
+}
+
+export interface MarkAsReadyPayloadType {
+  order_id: number;
+  orderDetail_id: number;
+  quantity: number;
+  status: string;
+}
+
 export interface Table {
   id: number;
   table_no: string

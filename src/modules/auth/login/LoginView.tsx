@@ -59,6 +59,9 @@ const LoginView = () => {
       } else if (data.role === "chef") {
         routeToRedirect = "/chef/dashboard";
       } 
+      else if (data.role === "cashier") {
+        routeToRedirect = "/cashier/dashboard";
+      } 
       navigate(routeToRedirect, { replace: true });
 
       toast({

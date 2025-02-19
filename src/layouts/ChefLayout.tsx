@@ -4,7 +4,7 @@ import ProfileBox from "./common/ProfileBox";
 import { useState } from "react";
 import { Menu as MenuIcon, X as XIcon } from "lucide-react";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import Sidebar from "@/components/chef-sidebar/Sidebar";
+import Sidebar from "@/components/cashier-sidebar/Sidebar";
 
 const ChefLayout = () => {
   const { isAuthenticated, role } = useAuth();
@@ -19,6 +19,10 @@ const ChefLayout = () => {
 
   if (role === "waiter" ) {
     return <Navigate to="/waiter/dashboard" />;
+  }
+
+  if (role === "cashier" ) {
+    return <Navigate to="/cashier/dashboard" />;
   }
 
   return (
@@ -56,7 +60,7 @@ const ChefLayout = () => {
 
 
       {/* Main Content */}
-      <main className="flex flex-col w-full overflow-y-auto">
+      <main className="flex flex-col w-full">
         {/* Header */}
         <nav className="flex items-center justify-between p-3 bg-white shadow-md z-[50] sticky top-0">
           <button

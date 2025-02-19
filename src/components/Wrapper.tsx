@@ -22,7 +22,14 @@ import ChefDashboard from "@/modules/chef/dashboard/ChefDashboard";
 import WaiterDashboard from "@/modules/waiter/dashboard/WaiterDashboard";
 import TableList from "@/modules/waiter/order/TableList";
 import MenuList from "@/modules/waiter/order/MenuList";
+import CashierDashboard from "@/modules/cashier/dashboard/CashierDashboard";
+import CashierLayout from "@/layouts/CashierLayout";
+import DefaultLayout from "@/layouts/DefaultLayout";
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DefaultLayout/>
+  },
   {
     path: "/waiter",
     element: <WaiterLayout />,
@@ -63,6 +70,24 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <ChefDashboard />,
+      },
+      // Dashboard End
+
+    ],
+  },
+  {
+    path: "/cashier",
+    element: <CashierLayout />,
+    errorElement: <ErrorView />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="dashboard" replace />,
+      },
+      // Dashboard Start
+      {
+        path: "dashboard",
+        element: <CashierDashboard />,
       },
       // Dashboard End
 

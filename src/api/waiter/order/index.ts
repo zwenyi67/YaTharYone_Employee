@@ -8,12 +8,14 @@ import axios from "axios";
 import {
   GetMenuCategoriesType,
   GetMenusType,
+  GetPrevOrderType,
   GetTablesType,
   PostResponse,
   ProceedOrderPayloadType,
+  RequestBillPayloadType,
+  ServeOrderPayloadType,
   UpdateSupplierPayloadType,
 } from "./types";
-import { GetChefOrdersType } from "@/api/chef/order/types";
 
 const table_URL = "/waiter/tableList";
 const currentTable_URL = "/waiter/currentTableList"
@@ -102,8 +104,8 @@ export const getMenuCategories = {
 };
 
 export const getOrderById = {
-  useQuery: (orderId: number | null, opt?: UseQueryOptions<GetChefOrdersType[], Error>) =>
-    useQuery<GetChefOrdersType[], Error>({
+  useQuery: (orderId: number | null, opt?: UseQueryOptions<GetPrevOrderType[], Error>) =>
+    useQuery<GetPrevOrderType[], Error>({
       queryKey: ["getOrderById", orderId],
       queryFn: async () => {
         if (!orderId) throw new Error("Order ID is required");
@@ -117,6 +119,26 @@ export const getOrderById = {
         return data;
       },
       enabled: !!orderId, // Only run if orderId is valid
+      ...opt,
+    }),
+};
+
+export const readyOrderList = {
+  useQuery: (opt?: UseQueryOptions<GetPrevOrderType[], Error>) =>
+    useQuery<GetPrevOrderType[], Error>({
+      queryKey: ["readyOrderList"],
+      queryFn: async () => {
+        const response = await axios.get(`${order_URL}/readyOrderList`);
+
+        const { data, status, message } = response.data;
+
+        if (status !== 0) {
+          throw new Error(message);
+        }
+
+        return data;
+      },
+      throwOnError: true,
       ...opt,
     }),
 };
@@ -147,6 +169,70 @@ export const proceedOrder = {
           )
         }
 
+        return data
+      },
+      ...opt,
+    })
+  },
+}
+
+export const serveOrder = {
+  useMutation: (
+    opt?: UseMutationOptions<
+      PostResponse,
+      Error,
+      ServeOrderPayloadType,
+      unknown
+    >
+  ) => {
+    return useMutation({
+      mutationKey: ["serveOrder"],
+      mutationFn: async (payload: ServeOrderPayloadType) => {
+        const response = await axios.post(
+          `${order_URL}/serveOrder`,
+          payload
+        )
+
+        const { data, status, message } = response.data
+
+        if (status !== 0) {
+          throw new Error(
+            message ||
+            "An error occurred while processing the request."
+          )
+        }
+        return data
+      },
+      ...opt,
+    })
+  },
+}
+
+export const requestBill = {
+  useMutation: (
+    opt?: UseMutationOptions<
+      PostResponse,
+      Error,
+      RequestBillPayloadType,
+      unknown
+    >
+  ) => {
+    return useMutation({
+      mutationKey: ["requestBill"],
+      mutationFn: async (payload: RequestBillPayloadType) => {
+        const response = await axios.post(
+          `${order_URL}/requestBill`,
+          payload
+        )
+
+        const { data, status, message } = response.data
+
+        if (status !== 0) {
+          throw new Error(
+            message ||
+            "An error occurred while processing the request."
+          )
+        }
         return data
       },
       ...opt,

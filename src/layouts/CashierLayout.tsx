@@ -4,9 +4,9 @@ import ProfileBox from "./common/ProfileBox";
 import { useState } from "react";
 import { Menu as MenuIcon, X as XIcon } from "lucide-react";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import Sidebar from "@/components/waiter-sidebar/Sidebar";
+import Sidebar from "@/components/chef-sidebar/Sidebar";
 
-const WaiterLayout = () => {
+const CashierLayout = () => {
   const { isAuthenticated, role } = useAuth();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,12 +17,12 @@ const WaiterLayout = () => {
     return <Navigate to={"/auth/login"} state={{ from: location }} replace />;
   }
 
-  if (role === "chef" ) {
-    return <Navigate to="/chef/dashboard" />;
+  if (role === "waiter" ) {
+    return <Navigate to="/waiter/dashboard" />;
   }
 
-  if (role === "cashier" ) {
-    return <Navigate to="/cashier/dashboard" />;
+  if (role === "chef" ) {
+    return <Navigate to="/chef/dashboard" />;
   }
 
   return (
@@ -60,7 +60,7 @@ const WaiterLayout = () => {
 
 
       {/* Main Content */}
-      <main className="flex flex-col w-full overflow-y-auto">
+      <main className="flex flex-col w-full">
         {/* Header */}
         <nav className="flex items-center justify-between p-3 bg-white shadow-md z-[50] sticky top-0">
           <button
@@ -88,4 +88,4 @@ const WaiterLayout = () => {
   );
 };
 
-export default WaiterLayout;
+export default CashierLayout;
