@@ -111,6 +111,11 @@ export interface GetPrevOrderType extends TimeStamps {
   payment: Payment;
 }
 
+export type Table = {
+  id: number;
+  table_no: string;
+}
+
 export interface Payment extends TimeStamps {
   id: number;
   payment_number: string;

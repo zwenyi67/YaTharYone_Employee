@@ -44,7 +44,9 @@
     "tables-list": "Tables List",
     "menus-list": "Menus List",
     "waiter-dashboard": "Waiter Dashboard",
-    "chef-dashboard": "Chef Dashboard"
+    "chef-dashboard": "Chef Dashboard",
+    "ready-orders": "Current Orders",
+    "current-tables": "Current Tables"
 
   },
   "fields": {

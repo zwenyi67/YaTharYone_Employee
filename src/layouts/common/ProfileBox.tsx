@@ -21,8 +21,8 @@ const ProfileBox = () => {
 					<AvatarFallback>A</AvatarFallback>
 				</Avatar>
 				<div className="text-left">
-					<h5 className="text-[13px] font-semibold">Admin</h5>
-					<p className="text-muted text-[10px]">admin</p>
+					<h5 className="text-[13px] font-semibold">Tyler3</h5>
+					<p className="text-muted text-[10px]">cashier</p>
 				</div>
 				<span className="ml-1 text-muted">
 					{isDropdownOpen ? (

@@ -1,8 +1,5 @@
 import {
-  ArrowRightLeft,
   Gauge,
-  Store,
-  User2Icon,
 } from "lucide-react";
 
 export const sidebarData = [
@@ -15,28 +12,5 @@ export const sidebarData = [
     routeNames: ["/waiter/orders/tables"],
     name: "title.orders",
     icon: Gauge,
-  },
-  {
-    routeNames: [""],
-    name: "title.supplier-management",
-    icon: Store,
-    subMenu: [
-      {
-        routeNames: ["/supplier-management/suppliers"],
-        name: "title.suppliers",
-        icon: Store,
-      },
-      {
-        routeNames: ["/supplier-management/purchasehistories"],
-        name: "title.purchases",
-        icon: ArrowRightLeft,
-      },
-    ],
-  },
-  {
-    routeNames: ["/employee-management"],
-    name: "title.employee-management",
-    icon: User2Icon,
-    subMenu: [],
   },
 ];

@@ -1,5 +1,5 @@
 import api from "@/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -146,6 +146,16 @@ const MenuList = () => {
         data: previousOrderData,
         refetch: fetchPreviousOrder,
     } = api.waiterOrder.getOrderById.useQuery(selectedOrderId);
+
+    useEffect(() => {
+        if (previousOrderData && previousOrderData.length > 0) {
+            const order = previousOrderData[0];
+    
+            if (order.status === "completed") {
+                navigate("/waiter/orders/tables");
+            }
+        }
+    }, [previousOrderData, navigate]);
 
     const handlePreviousOrder = () => {
         if (selectedOrderId) {
