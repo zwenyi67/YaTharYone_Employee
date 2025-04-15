@@ -4,7 +4,7 @@ import ProfileBox from "./common/ProfileBox";
 import { useState } from "react";
 import { Menu as MenuIcon, X as XIcon } from "lucide-react";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import Sidebar from "@/components/cashier-sidebar/Sidebar";
+import Sidebar from "@/components/chef-sidebar/Sidebar";
 
 const ChefLayout = () => {
   const { isAuthenticated, role } = useAuth();
