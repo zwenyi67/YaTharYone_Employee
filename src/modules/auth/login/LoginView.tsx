@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -51,7 +51,7 @@ const LoginView = () => {
   const { mutate: loginUser } = api.auth.loginMutation.useMutation({
     onMutate: () => setIsLoading(true),
     onSuccess: (data) => {
-      userLogin(data.token, data.role);
+      userLogin(data.token, data.role, data.user);
 
       let routeToRedirect = "/";
       if (data.role === "waiter") {
@@ -160,11 +160,11 @@ const LoginView = () => {
                 </FormItem>
               )}
             />
-            <div className="flex justify-right">
+            {/* <div className="flex justify-right">
               <NavLink to={"/"} className={"text-xs text-destructive"}>
                 Forget Password?
               </NavLink>
-            </div>
+            </div> */}
             <Button
               type="submit"
               className="bg-secondary hover:bg-secondary active:bg-secondary w-full"

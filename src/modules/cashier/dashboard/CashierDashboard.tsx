@@ -16,7 +16,7 @@ const PAYMENT_METHODS = [
 ];
 
 const CashierDashboard = () => {
-  const { data: orders = [], isFetching, refetch } = api.cashier.paymentOrder.useQuery();
+  const { data: orders = [], refetch } = api.cashier.paymentOrder.useQuery();
   const [selectedOrder, setSelectedOrder] = useState<GetPaymentOrder | null>(null);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
@@ -27,11 +27,11 @@ const CashierDashboard = () => {
 
   const dispatch = useDispatch();
 
-  const handleProcessPayment = (method: string) => {
-    console.log(`Processing payment with ${method}`);
-    setIsPaymentOpen(false);
-    setIsReceiptOpen(true);
-  };
+  // const handleProcessPayment = (method: string) => {
+  //   console.log(`Processing payment with ${method}`);
+  //   setIsPaymentOpen(false);
+  //   setIsReceiptOpen(true);
+  // };
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
 

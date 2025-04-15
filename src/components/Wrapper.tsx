@@ -25,6 +25,7 @@ import MenuList from "@/modules/waiter/order/MenuList";
 import CashierDashboard from "@/modules/cashier/dashboard/CashierDashboard";
 import CashierLayout from "@/layouts/CashierLayout";
 import DefaultLayout from "@/layouts/DefaultLayout";
+import { AuthProvider } from "@/store/AuthContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -124,6 +125,7 @@ const Wrapper = () => {
 
   return (
     <>
+     <AuthProvider>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <Loader />
@@ -132,6 +134,7 @@ const Wrapper = () => {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </Provider>
+      </AuthProvider>
     </>
   );
 };

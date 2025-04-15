@@ -33,7 +33,9 @@ const WaiterDashboard = () => {
   }
 
   const onTableClick = (item: GetTablesType) => {
-    navigate(`/waiter/orders/tables/${item.id}/menus`, {
+    console.log(item.id)
+    navigate(`/waiter/orders/tables/${item.id}/menus`, 
+      {
       state: { existingOrders: item.orders },
     });
   };
@@ -112,10 +114,10 @@ const WaiterDashboard = () => {
                   <div className="text-lg font-semibold text-gray-900 mb-1">
                     {item.quantity}x {item.menu.name}
                   </div>
-                  <div className="text-sm text-gray-500">{item.table_no}</div>
-                  <div className="text-xs text-gray-400 mb-2">
+                  <div className="text-sm text-gray-500">{item.table.table_no}</div>
+                  {/* <div className="text-xs text-gray-400 mb-2">
                     {new Date(item.order_created).toLocaleTimeString()}
-                  </div>
+                  </div> */}
                   {item.status === "ready" ? (
                     <Button
                       onClick={() => serveOrderToggle(item)}

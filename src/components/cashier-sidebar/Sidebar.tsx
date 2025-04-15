@@ -44,21 +44,21 @@ const Sidebar = () => {
   };
 
 
-  const ActiveSubMenu = (paths: string[]): string => {
-    const currentPath = window.location.pathname;
+  // const ActiveSubMenu = (paths: string[]): string => {
+  //   const currentPath = window.location.pathname;
 
-    if (!paths || paths.some((path) => path === "")) {
-      return "";
-    }
+  //   if (!paths || paths.some((path) => path === "")) {
+  //     return "";
+  //   }
 
-    const isActive = paths.some((path) => currentPath.startsWith(path));
+  //   const isActive = paths.some((path) => currentPath.startsWith(path));
 
-    if (isActive) {
-      return "bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow";
-    }
+  //   if (isActive) {
+  //     return "bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow";
+  //   }
 
-    return "";
-  };
+  //   return "";
+  // };
 
 
   return (
@@ -96,7 +96,7 @@ const Sidebar = () => {
               )}
             </div>
             {/* Submenu */}
-            {item.subMenu && openSubMenus[item.name] && (
+            {/* {item.subMenu && openSubMenus[item.name] && (
               <div className="ml-[14px] mt-1 pl-3 border-s-2 border-dashed mb-3">
                 {item.subMenu.map((subItem) => (
                   <div
@@ -114,7 +114,7 @@ const Sidebar = () => {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
           </div>
         ))}
       </div>

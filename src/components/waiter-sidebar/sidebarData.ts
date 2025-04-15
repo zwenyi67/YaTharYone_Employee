@@ -1,4 +1,5 @@
 import {
+  FileCheck,
   Gauge,
 } from "lucide-react";
 
@@ -11,6 +12,6 @@ export const sidebarData = [
   {
     routeNames: ["/waiter/orders/tables"],
     name: "title.orders",
-    icon: Gauge,
+    icon: FileCheck,
   },
 ];

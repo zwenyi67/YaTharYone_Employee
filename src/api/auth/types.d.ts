@@ -7,8 +7,20 @@ export type LoginPayload = {
 export type LoginResponse = {
     token: string
     role: string
+    user: UserData
 }
 
 export type FileUploadResponse = {
     file: string
+}
+
+export type UserData = {
+    id: number;
+    employee_id: number;
+    full_name: string;
+    phone: string;
+    email: string;
+    profile?: string;
+    role_id: number;
+    role_name: string;
 }

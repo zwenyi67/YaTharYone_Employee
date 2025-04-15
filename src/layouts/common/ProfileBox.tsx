@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutDialog } from "@/components/dialogs";
+import { useUserData } from "@/store/AuthContext";
 
 const ProfileBox = () => {
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
+	const { userData } = useUserData();
 
 	const toggleDropdown = () => {
 		setDropdownOpen(!isDropdownOpen);
@@ -18,11 +20,11 @@ const ProfileBox = () => {
 			>
 				<Avatar className="w-8 h-8">
 					<AvatarImage src="/image" alt="Profile Image" />
-					<AvatarFallback>A</AvatarFallback>
+					<AvatarFallback>{userData?.full_name?.charAt(0)?.toUpperCase() || "N"}</AvatarFallback>
 				</Avatar>
 				<div className="text-left">
-					<h5 className="text-[13px] font-semibold">Tyler3</h5>
-					<p className="text-muted text-[10px]">cashier</p>
+				<h5 className="text-[13px] font-semibold">{userData?.full_name}</h5>
+				<p className="text-muted text-[10px]">{userData?.role_name}</p>
 				</div>
 				<span className="ml-1 text-muted">
 					{isDropdownOpen ? (
